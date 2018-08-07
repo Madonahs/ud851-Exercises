@@ -319,7 +319,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
+        String queryUrl = mUrlDisplayTextView.getText().toString();
+        outState.putString(SEARCH_QUERY_URL_EXTRA, queryUrl);
         //String queryUrl = mUrlDisplayTextView.getText().toString();
         //outState.putString(SEARCH_QUERY_URL_EXTRA, queryUrl);
 
