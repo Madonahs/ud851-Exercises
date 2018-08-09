@@ -1,4 +1,4 @@
-package android.example.com.visualizerpreferences;
+package android.example.com.visualizerpreferences.activities;
 
 /*
  * Copyright (C) 2016 The Android Open Source Project
@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.example.com.visualizerpreferences.AudioVisuals.AudioInputReader;
 import android.example.com.visualizerpreferences.AudioVisuals.VisualizerView;
+import android.example.com.visualizerpreferences.R;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
