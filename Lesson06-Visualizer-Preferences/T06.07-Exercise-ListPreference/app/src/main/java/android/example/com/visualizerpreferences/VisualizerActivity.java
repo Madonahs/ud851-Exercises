@@ -48,7 +48,7 @@ public class VisualizerActivity extends AppCompatActivity implements SharedPrefe
         setupPermissions();
     }
 
-    // TODO (4) Update setupSharedPreferences and onSharedPreferenceChanged to load the color
+    //  (4) Update setupSharedPreferences and onSharedPreferenceChanged to load the color
     // from shared preferences. Call setColor, passing in the color you got
     private void setupSharedPreferences() {
         // Get all of the values from shared preferences to set it up
