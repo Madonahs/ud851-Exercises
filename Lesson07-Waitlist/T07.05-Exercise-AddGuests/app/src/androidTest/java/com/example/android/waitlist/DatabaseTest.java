@@ -266,7 +266,7 @@ public class DatabaseTest {
     /**
      * Deletes the entire database.
      */
-    void deleteTheDatabase(){
+    private void deleteTheDatabase(){
         try {
             /* Use reflection to get the database name from the db helper class */
             Field f = mDbHelperClass.getDeclaredField("DATABASE_NAME");

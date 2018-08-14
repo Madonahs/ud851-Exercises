@@ -15,7 +15,7 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.Gues
 
     // Holds on to the cursor to display the waitlist
     private Cursor mCursor;
-    private Context mContext;
+    private final Context mContext;
 
     /**
      * Constructor using the context and the db cursor
@@ -57,13 +57,24 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.Gues
         return mCursor.getCount();
     }
 
-    // TODO (15) Create a new function called swapCursor that takes the new cursor and returns void
+    public void swapCursor(Cursor cursor){
 
-    // TODO (16) Inside, check if the current cursor is not null, and close it if so
+        if(mCursor != null){
+            mCursor.close();
+        }
+        mCursor = cursor;
 
-    // TODO (17) Update the local mCursor to be equal to  newCursor
+        if(cursor != null){
+            this.notifyDataSetChanged();
+        }
+    }
+    // (15) Create a new function called swapCursor that takes the new cursor and returns void
 
-    // TODO (18) Check if the newCursor is not null, and call this.notifyDataSetChanged() if so
+    //  (16) Inside, check if the current cursor is not null, and close it if so
+
+    // (17) Update the local mCursor to be equal to  newCursor
+
+    //  (18) Check if the newCursor is not null, and call this.notifyDataSetChanged() if so
 
     /**
      * Inner class to hold the views needed to display a single item in the recycler-view
@@ -71,9 +82,9 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.Gues
     class GuestViewHolder extends RecyclerView.ViewHolder {
 
         // Will display the guest name
-        TextView nameTextView;
+        final TextView nameTextView;
         // Will display the party size number
-        TextView partySizeTextView;
+        final TextView partySizeTextView;
 
         /**
          * Constructor for our ViewHolder. Within this constructor, we get a reference to our
@@ -82,7 +93,7 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.Gues
          * @param itemView The View that you inflated in
          *                 {@link GuestListAdapter#onCreateViewHolder(ViewGroup, int)}
          */
-        public GuestViewHolder(View itemView) {
+        GuestViewHolder(View itemView) {
             super(itemView);
             nameTextView = (TextView) itemView.findViewById(R.id.name_text_view);
             partySizeTextView = (TextView) itemView.findViewById(R.id.party_size_text_view);

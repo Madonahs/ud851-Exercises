@@ -7,14 +7,14 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestUtil {
+class TestUtil {
 
     public static void insertFakeData(SQLiteDatabase db){
         if(db == null){
             return;
         }
         //create a list of fake guests
-        List<ContentValues> list = new ArrayList<ContentValues>();
+        List<ContentValues> list = new ArrayList<>();
 
         ContentValues cv = new ContentValues();
         cv.put(WaitlistContract.WaitlistEntry.COLUMN_GUEST_NAME, "John");
