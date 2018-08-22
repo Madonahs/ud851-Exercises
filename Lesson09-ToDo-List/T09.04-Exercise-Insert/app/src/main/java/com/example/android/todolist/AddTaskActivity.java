@@ -19,6 +19,7 @@ package com.example.android.todolist;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.RadioButton;
 
 
@@ -44,11 +45,12 @@ public class AddTaskActivity extends AppCompatActivity {
      */
     public void onClickAddTask(View view) {
         // Not yet implemented
-        // TODO (6) Check if EditText is empty, if not retrieve input and store it in a ContentValues object
+        // (6) Check if EditText is empty, if not retrieve input and store it in a ContentValues object
 
-        // TODO (7) Insert new task data via a ContentResolver
 
-        // TODO (8) Display the URI that's returned with a Toast
+        //  (7) Insert new task data via a ContentResolver
+
+        // (8) Display the URI that's returned with a Toast
         // [Hint] Don't forget to call finish() to return to MainActivity after this insert is complete
 
     }
