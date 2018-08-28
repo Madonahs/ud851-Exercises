@@ -16,8 +16,13 @@
 
 package com.example.android.todolist;
 
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.LiveData;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -31,6 +36,7 @@ import com.example.android.todolist.database.AppDatabase;
 import com.example.android.todolist.database.TaskEntry;
 
 import java.util.List;
+import java.util.Observer;
 
 import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
 
@@ -85,8 +91,8 @@ public class MainActivity extends AppCompatActivity implements TaskAdapter.ItemC
                         int position = viewHolder.getAdapterPosition();
                         List<TaskEntry> tasks = mAdapter.getTasks();
                         mDb.taskDao().deleteTask(tasks.get(position));
-                        // TODO (6) Remove the call to retrieveTasks
-                        retrieveTasks();
+                        //  (6) Remove the call to retrieveTasks
+                        //retrieveTasks();
                     }
                 });
             }
@@ -109,7 +115,8 @@ public class MainActivity extends AppCompatActivity implements TaskAdapter.ItemC
         });
 
         mDb = AppDatabase.getInstance(getApplicationContext());
-        // TODO (7) Call retrieveTasks from here and remove the onResume method
+        // done (7) Call retrieveTasks from here and remove the onResume method
+        retrieveTasks();
     }
 
     /**
@@ -117,21 +124,31 @@ public class MainActivity extends AppCompatActivity implements TaskAdapter.ItemC
      * Often, this is after new data has been inserted through an AddTaskActivity,
      * so this re-queries the database data for any changes.
      */
-    @Override
+    /*@Override
     protected void onResume() {
         super.onResume();
         retrieveTasks();
-    }
+    }*/
 
     private void retrieveTasks() {
-        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+        final LiveData<List<TaskEntry>> tasks = mDb.taskDao().loadAllTasks();
+
+       tasks.observe(this, new android.arch.lifecycle.Observer<List<TaskEntry>>() {
+           @Override
+           public void onChanged(@Nullable List<TaskEntry> taskEntries) {
+               Log.d(TAG,"Retrieving data");
+
+               mAdapter.setTasks(taskEntries);
+           }
+       });
+       /* AppExecutors.getInstance().diskIO().execute(new Runnable() {
             @Override
             public void run() {
-                // TODO (4) Extract all this logic outside the Executor and remove the Executor
+                // done (4) Extract all this logic outside the Executor and remove the Executor
                 Log.d(TAG, "Actively retrieving the tasks from the DataBase");
-                // TODO (3) Fix compile issue by wrapping the return type with LiveData
-                final List<TaskEntry> tasks = mDb.taskDao().loadAllTasks();
-                // TODO (5) Observe tasks and move the logic from runOnUiThread to onChanged
+                // done (3) Fix compile issue by wrapping the return type with LiveData
+
+                // done (5) Observe tasks and move the logic from runOnUiThread to onChanged
                 // We will be able to simplify this once we learn more
                 // about Android Architecture Components
                 runOnUiThread(new Runnable() {
@@ -141,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements TaskAdapter.ItemC
                     }
                 });
             }
-        });
+        });*/
     }
 
     @Override
