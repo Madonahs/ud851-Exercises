@@ -25,8 +25,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.background.sync.MyIntentService;
 import com.example.android.background.sync.ReminderTasks;
-import com.example.android.background.sync.WaterReminderIntentService;
 import com.example.android.background.utilities.PreferenceUtilities;
 
 public class MainActivity extends AppCompatActivity implements
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements
         mToast.show();
 
         // COMPLETED (15) Create an explicit intent for WaterReminderIntentService
-        Intent incrementWaterCountIntent = new Intent(this, WaterReminderIntentService.class);
+        Intent incrementWaterCountIntent = new Intent(this, MyIntentService.class);
         // COMPLETED (16) Set the action of the intent to ACTION_INCREMENT_WATER_COUNT
         incrementWaterCountIntent.setAction(ReminderTasks.ACTION_INCREMENT_WATER_COUNT);
         // COMPLETED (17) Call startService and pass the explicit intent you just created
