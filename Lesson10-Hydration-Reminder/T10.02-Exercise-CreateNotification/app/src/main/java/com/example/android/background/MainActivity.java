@@ -21,12 +21,14 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.background.sync.ReminderTasks;
 import com.example.android.background.sync.WaterReminderIntentService;
+import com.example.android.background.utilities.NotificationUtils;
 import com.example.android.background.utilities.PreferenceUtilities;
 
 public class MainActivity extends AppCompatActivity implements
@@ -47,6 +49,13 @@ public class MainActivity extends AppCompatActivity implements
         mWaterCountDisplay = (TextView) findViewById(R.id.tv_water_count);
         mChargingCountDisplay = (TextView) findViewById(R.id.tv_charging_reminder_count);
         mChargingImageView = (ImageView) findViewById(R.id.iv_power_increment);
+        final Button testNotificationButton = findViewById(R.id.testNotification);
+        testNotificationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                testNotification();
+            }
+        });
 
         /** Set the original values in the UI **/
         updateWaterCount();
@@ -55,6 +64,10 @@ public class MainActivity extends AppCompatActivity implements
         /** Setup the shared preference listener **/
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         prefs.registerOnSharedPreferenceChangeListener(this);
+    }
+
+    private void testNotification() {
+        NotificationUtils.remindUserBecauseCharging(this);
     }
 
     /**
@@ -89,7 +102,8 @@ public class MainActivity extends AppCompatActivity implements
         startService(incrementWaterCountIntent);
     }
 
-    // TODO (15) Create a method called testNotification that triggers NotificationUtils' remindUserBecauseCharging
+    // (15) Create a method called testNotification that triggers NotificationUtils' remindUserBecauseCharging
+
 
     @Override
     protected void onDestroy() {
@@ -111,4 +125,6 @@ public class MainActivity extends AppCompatActivity implements
             updateChargingReminderCount();
         }
     }
+
+
 }
