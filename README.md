@@ -26,11 +26,15 @@ Prior to Android 23+ you needed to use a sticky intent to get battery state. As 
 
 You don't need a broadcast receiver for a sticky intent, but you use similar looking code to registering a receiver:
 
-IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-Intent batteryStatus = context.registerReceiver(null, ifilter);
+
+```IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+   Intent batteryStatus = context.registerReceiver(null, ifilter);
+  
+   
 Notice how registerReceiver is used, but instead of passing in a broadcast receiver, null is passed. The intent filter here is the intent filter for the sticky intent Intent.ACTION_BATTERY_CHANGED. The registerReceiver method will return an intent, and it is that intent which has all of the battery information, which you can use:
 
 boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL;
+
 For more information on how to getting information about the battery, check out the Monitoring the Battery Level and Charging State documentation.
 
 Now that you know how to get battery state, you should be able to complete the following exercise and fix the bug. The code is below.
